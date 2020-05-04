@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Ingredient Analyzer</title>
+  </head>
+  <body>
+    <h1>Ingredient List</h1> 
+    <div>Add a new ingredient:  
+        <form action="{{ url_for('add') }}" method="POST" onsubmit="onSubmitHandler()"> 
+            <input id = "tb_ingredient" type="text" name="ingredient_to_add"> 
+            <button id="btn_add_ingredient" type="button" onclick="addIngredient()"> Add Ingredient</button>
+            
+            <div>
+                <h2>Ingredients:</h2>
+                <ul id="ingredients_to_analyze"></ul>
+            </div>
+            <div>
+                <input type="submit" value="Analyze" name="analyze" class="button" >
+                <input id="hdn_all_ingredients" type="hidden" name="ingredients">
+            </div>
+        </form> 
+       
+    </div> 
+
+    <script>
+       
+            onIngredientTextEnterPressHandler();
+            
+            function onIngredientTextEnterPressHandler(){
+                document.getElementById("tb_ingredient").onkeypress = function(e) {
+                    const key = e.charCode || e.keyCode || 0;     
+                    if (key == 13) {
+                        e.preventDefault();
+                        addIngredient();
+                    }
+                }
+            }
+
+            function onSubmitHandler(){
+                // Set hidden input to have all ingredient values to be submitted
+                let hdnAllIngredients = document.getElementById("hdn_all_ingredients");
+                hdnAllIngredients.value = getListOfIngredients();
+            }
+
+            function addIngredient(){
+                let ul = document.getElementById("ingredients_to_analyze");
+                const ingredient = document.getElementById("tb_ingredient").value;
+                if(ingredient.trim() != "" && !isDuplicate(ingredient)){
+                    ul.appendChild(createIngredientListItem(ingredient));
+                }
+                clearIngredientTextBox();
+            }
+
+            function isDuplicate(ingredient){
+                const ingredients = getListOfIngredients();
+                return ingredients.includes(ingredient)
+            }
+
+            function createIngredientListItem(ingredient){
+                let li = document.createElement("li");
+                li.appendChild(document.createTextNode(ingredient));
+                return li;
+            }
+
+            function clearIngredientTextBox(){
+                let tbIngredient = document.getElementById("tb_ingredient");
+                tbIngredient.value = "";
+            }
+
+            function getListOfIngredients(){
+                // Select all list items in the ingredients to analyze list
+                const listItems = document.querySelectorAll('#ingredients_to_analyze li');
+                let ingredients = []
+                for (let i = 0; i < listItems.length; i++) {
+                    // Get the text from the list item and add to ingredients array
+                    ingredient = listItems[i].textContent;
+                    ingredients.push(ingredient);
+                }
+                return ingredients;
+            }
+      </script>
+    
+  </body>
+</html>
