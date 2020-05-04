@@ -6,7 +6,7 @@ app = Flask(__name__)
 def home():
     return render_template("home.html")
 
-@app.route("/add",  methods=['POST'])
+@app.route("/analyze",  methods=['POST'])
 def add():
     ingredients = request.form['ingredients'].split(",")
     return redirect(url_for("home"))
