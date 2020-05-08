@@ -6,18 +6,24 @@
     <link rel="stylesheet" href="static/app.css">
   </head>
   <body>
-    <h1>Ingredient List</h1> 
-    <div>Add a new ingredient:
+    <h1>Ingredient Analyzer</h1> 
+    <div class="margin-top-2"><span>Add a new ingredient:</span>
         <form id="ingredient_form" action="{{ url_for('analyze') }}" method="POST"> 
-            <input id = "tb_ingredient" type="text" name="ingredient_to_add"> 
-            <div id="ingredient_section" class="no_items">
+            <input id = "tb_ingredient" type="text" name="ingredient_to_add" autocomplete="off"> 
+            <div id="ingredient_section" class="no_items margin-top-4">
+              <datalist id="ingredient_datalist"></datalist>
+              <datalist id="full_ingredient_datalist">
+                {% for ingredient in ingredient_list %}
+                  <option value="{{ingredient}}" ></option>
+                {% endfor %}
+              </datalist>
                 <div>
                     <h2>Ingredients:</h2>
-                    <ul id="ingredients_to_analyze"></ul>
+                    <ul id="ingredients_to_analyze" class="edit"></ul>
                 </div>
                 <div>
-                    <input type="submit" value="Analyze" name="analyze" class="button" >
-                    <input id="hdn_all_ingredients" type="hidden" name="ingredients">
+                  <input type="submit" value="Analyze" name="analyze" class="button" >
+                  <input id="hdn_all_ingredients" type="hidden" name="ingredients">
                 </div>
             </div>
         </form> 

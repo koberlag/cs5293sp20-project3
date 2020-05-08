@@ -5,9 +5,15 @@ verify_ssl = true
 
 [dev-packages]
 pylint = "*"
+ipykernel = "*"
+rope = "*"
 
 [packages]
+spacy = "*"
+pandas = "*"
 flask = "*"
+sklearn = "*"
+numpy = "*"
 
 [requires]
 python_version = "3.8"

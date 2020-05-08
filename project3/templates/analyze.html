@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Ingredient Analyzer</title>
+    <link rel="stylesheet" href="static/app.css">
+  </head>
+  <body>
+    <h1>Ingredient Analyzer</h1> 
+    <div class="result margin-top-1">
+        <a href="/">Analyze more ingredients</a>
+    </div>
+    <div class="margin-top-2 result">
+        <div class="margin-top-2 result">
+            Cuisine: {{ best_match_cuisine[0] }} {{ best_match_cuisine[1] }}
+        </div>
+        <div class="margin-top-1 result center">
+            Closest {{closest_match_recipes|count}} recipes: 
+            <ul id="closest_recipes" class="center_ul">
+                {% for recipe in closest_match_recipes %}
+                    <li>{{recipe[0]}} ({{recipe[1]}})</li>
+                {% endfor %}
+            </ul>
+          
+        </div>
+    </div> 
+  </body>
+</html>

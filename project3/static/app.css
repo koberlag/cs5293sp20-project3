@@ -43,18 +43,69 @@ input:hover[type="submit"]{
     cursor: pointer;
 }
 
+
+button{
+    background: white;
+    width: 100%;
+    box-sizing: border-box;
+    height:50px ;
+    font-size: 20px;
+    font-weight: 0.5px;
+    padding-left:25px;
+    border: 3px solid gray;
+    color: gray;
+}
+
+button:hover{
+    background: #edf1f5;
+    border: 3px solid #86a8e7;
+    outline:none;
+    color: black;
+    cursor: pointer;
+}
+
+
 li {
     text-align: left;
     font-size: 40px;
     list-style: none;
     margin: 0;
+}
+
+.edit li {
     cursor: pointer;
 }
 
-li:hover {
+.edit li:hover{
     text-decoration: line-through;
+    color:red;
 } 
 
 .no_items{
     display:none;
+}
+
+.margin-top-4{
+    margin-top: 4em;
+}
+
+.margin-top-2{
+    margin-top: 2em;
+}
+
+.margin-top-1{
+    margin-top: 1em;
+}
+
+.result{
+    font-size: 1.5em;
+}
+.center{
+    text-align: center;
+}
+
+.center_ul{
+    width:auto;
+    display: inline-block;
+    padding-left: 0;
 }

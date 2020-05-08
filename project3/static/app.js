@@ -4,7 +4,7 @@
     
     function addIngredient(ingredient){
         // If the item is not empty and does not already exist
-        if(ingredient.trim() != "" && !isDuplicate(ingredient)){
+        if(ingredient != "" && !isDuplicate(ingredient)){
             clearIngredientTextBox();
             // Add to ingredient list
             ingredientList.push(ingredient);
@@ -77,7 +77,8 @@
         const key = e.charCode || e.keyCode || 0;     
         if (key == 13) {
             e.preventDefault();
-            addIngredient(getIngredientInputElem().value);
+            const ingredient = getIngredientInputElem().value.trim();
+            addIngredient(ingredient);
         }
     }
 
@@ -88,4 +89,34 @@
         let hdnAllIngredients = document.getElementById("hdn_all_ingredients");
         hdnAllIngredients.value = ingredientList;
     }
+
+    function getFullIngredientList(){
+        dl = document.getElementById("full_ingredient_datalist");
+        options = dl.getElementsByTagName("option");
+        ingredients = []
+        for (let index = 0; index < options.length; index++) {
+            const element = options[index];
+            ingredients.push(element.value)
+        }
+        return ingredients
+    }
+    let fullIngredientList = []
+    document.getElementById("tb_ingredient").addEventListener('keyup', setSuggestedIngredients)
+    function setFullIngredientListVar(){
+        if(fullIngredientList.length == 0){
+            fullIngredientList =  getFullIngredientList();
+        }
+    }
+     function setSuggestedIngredients(e) { 
+        document.getElementById('ingredient_datalist').innerHTML = "";
+        const value = e.target.value.trim().toLowerCase();
+        if(value.length < 3) {
+            return
+        }
+        size = 20;
+        setFullIngredientListVar();
+        optVals = fullIngredientList.filter(ingredient => ingredient.includes(value)).slice(0, size);
+        const options =  optVals.map(ingredient => '<option>' + ingredient + '</option>').join('');
+        document.getElementById('ingredient_datalist').innerHTML = options;
+     } 
 })();
