@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
-from ingredients import INGREDIENTS
-from analyzer import analyze_ingredients
+from project3.ingredients import INGREDIENTS
+from project3.analyzer import analyze_ingredients
 
-app = Flask(__name__)
+app=Flask(__name__)
 
 
 

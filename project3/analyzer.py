@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
-from reader import read_yummly_json
-from modeler import get_model_vec_matrix
+from project3.reader import read_yummly_json
+from project3.modeler import get_model_vec_matrix
 
 
 
@@ -48,7 +48,7 @@ def analyze_ingredients(user_ingredients):
     # Read Yummly Json Returns data frame
     df = read_yummly_json()
 
-    # Get the classifeier model, vectorizer and yummly data feature matrix
+    # Get the classifier model, vectorizer and yummly data feature matrix
     model, vectorizer, feature_matrix = get_model_vec_matrix(df)
 
     # Get feature matrix of user input

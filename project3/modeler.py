@@ -1,5 +1,5 @@
 import os
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
 import spacy
 import string
 from spacy.lang.en.stop_words import STOP_WORDS
@@ -79,12 +79,13 @@ def get_model_vec_matrix(df):
     try:
         # Load the persisted objects
         model = pickle.load(open(PROJECT_DIR + os.path.sep + "models" + os.path.sep +  "finalized_model.sav", 'rb'))
-        vectorizer = pickle.load(open(PROJECT_DIR + os.path.sep + "models" + os.path.sep +  "vectorizer.pickle", "rb"))
-        feature_matrix = pickle.load(open(PROJECT_DIR + os.path.sep + "models" + os.path.sep +  "feature_matrix.pickle", "rb"))
+        vectorizer = pickle.load(open(PROJECT_DIR + os.path.sep + "models" + os.path.sep +  "vectorizer.sav", "rb"))
+        feature_matrix = pickle.load(open(PROJECT_DIR + os.path.sep + "models" + os.path.sep +  "feature_matrix.sav", "rb"))
     except Exception as ex:
         print(ex)
 
     if(model is None):
+        print("Building new model... This may take a minute or two.")
         # Create objects and persist them
         model, vectorizer, feature_matrix = create_model_vec_matrix(df)
     return model, vectorizer, feature_matrix
@@ -95,8 +96,8 @@ def pickle_model_vec_matrix(model, vectorizer, feature_matrix):
 
     # save the model and vectorizer to disk
     pickle.dump(model, open(PROJECT_DIR + os.path.sep + "models" + os.path.sep + 'finalized_model.sav', 'wb'))
-    pickle.dump(vectorizer, open(PROJECT_DIR + os.path.sep + "models" + os.path.sep +  "vectorizer.pickle", "wb"))
-    pickle.dump(feature_matrix, open(PROJECT_DIR + os.path.sep + "models" + os.path.sep + "feature_matrix.pickle", "wb"))
+    pickle.dump(vectorizer, open(PROJECT_DIR + os.path.sep + "models" + os.path.sep +  "vectorizer.sav", "wb"))
+    pickle.dump(feature_matrix, open(PROJECT_DIR + os.path.sep + "models" + os.path.sep + "feature_matrix.sav", "wb"))
     
 
 def create_vectorizer():
@@ -108,8 +109,5 @@ def create_vectorizer():
 def create_classifier():
     """Creates and returns a logistics regression classifier"""
 
-    classifier = None
     # Logistic Regression
-    classifier = LogisticRegression(penalty='l2', max_iter=1000, C=1, random_state=42)
-
-    return classifier
+    return LogisticRegression(penalty='l2', max_iter=1000, C=1, random_state=42)
