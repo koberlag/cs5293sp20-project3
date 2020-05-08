@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import CountVectorizer
 
-df = reader.read_yummly_json().head(10)
+df = reader.read_yummly_json()
 
 def test_read_yummly_json():
     df = reader.read_yummly_json()
