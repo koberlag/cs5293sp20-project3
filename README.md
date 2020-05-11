@@ -9,7 +9,7 @@
     FROM YUMMLY, USING A COUNT VECTORIZER AND LOGISTIC REGRESSION CLASSIFIER.
     THE TRAINED MODEL IS THEN USED FOR THE PREDICTIONS OF THE CUISINE AND
     SIMILAR MEALS. THE APPLICATION HAS A WEB INTERFACE FOR USER INPUT, AND
-    USES THE FLASK WEB FRAMEWORK
+    USES THE FLASK WEB FRAMEWORK.
 
 
 ## HOW DID YOU TURN YOUR TEXT INTO FEATURES AND WHY?
@@ -29,7 +29,7 @@
 
 
 ## WHAT N DID YOU CHOOSE AND WHY?
-    I CHOSE N = 4, BECAUSE SIMPLY BECAUSE IT SEEMS LIKE IF 
+    I CHOSE N = 4 SIMPLY BECAUSE IT SEEMS LIKE IF 
     SOMEONE WERE WANTING TO SEE ALTERNATIVE RECIPES, THEY WOULD WANT AT LEAST A FEW OPTIONS
     BUT MAY NOT WANT A HUGE LIST.
 
@@ -123,7 +123,6 @@ THE TESTS FOR THE APPLICATION MAY BE RUN USING THE FOLLOWING COMMAND:
 
 - test_get_closest_recipes(): Tests that a closest_recipes value is returned
 and that the length is the given size of n=2.
-
   
 - test_analyze_ingredients(): Tests that a best match tuple is returned with the first element not being empty, and the second being greater than 0. Tests the closest_matches tuple list, and ensures that the length is n=4 and that the first element of the first tuple is not empty, and that the second element of the first tuple is >= 0.
 
@@ -149,7 +148,6 @@ and that the length is the given size of n=2.
 
 ## EXTERNAL RESOURCES
 
--   HTTPS://SCIKIT-LEARN.ORG/STABLE/MODULES/GENERATED/SKLEARN.METRICS.SILHOUETTE_SCORE.HTML -- FOR SILHOETTE SCORE TESTING
 -   HTTPS://SCIKIT-LEARN.ORG - FOR LOGISTIC REGRESSION, COSINE_SIMILARITY, AND CROSS_VAL_SCORE
 
 -   HTTPS://FLASK.PALLETSPROJECTS.COM/EN/1.1.X/ - FOR FLASK WEB APP
