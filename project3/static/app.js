@@ -32,27 +32,16 @@
 
     function toggleIngredientSection(){
         const ingredientSection = document.getElementById("ingredient_section");
-        const hasNoItemsClass = ingredientSection.classList.contains("no_items");
         const hasItems = ingredientList.length > 0;
-        if(hasItems && hasNoItemsClass){
-            ingredientSection.classList.remove('no_items');
-        }
-        else if(!hasItems && !hasNoItemsClass){
-            ingredientSection.classList.add('no_items');
-        }
+        ingredientSection.classList.toggle('no_items', !hasItems);
     }
 
     function isDuplicate(ingredient){
-        const ingredients = getListOfIngredients();
-        return ingredients.includes(ingredient)
+        return ingredientList.includes(ingredient)
     }
 
     function clearIngredientTextBox(){
         getIngredientInputElem().value = "";
-    }
-
-    function getListOfIngredients(){
-        return ingredientList;
     }
 
     // HTML Element getters
@@ -90,33 +79,35 @@
         hdnAllIngredients.value = ingredientList;
     }
 
-    function getFullIngredientList(){
-        dl = document.getElementById("full_ingredient_datalist");
-        options = dl.getElementsByTagName("option");
-        ingredients = []
-        for (let index = 0; index < options.length; index++) {
-            const element = options[index];
-            ingredients.push(element.value)
-        }
-        return ingredients
-    }
-    let fullIngredientList = []
-    document.getElementById("tb_ingredient").addEventListener('keyup', setSuggestedIngredients)
-    function setFullIngredientListVar(){
-        if(fullIngredientList.length == 0){
-            fullIngredientList =  getFullIngredientList();
-        }
-    }
-     function setSuggestedIngredients(e) { 
-        document.getElementById('ingredient_datalist').innerHTML = "";
-        const value = e.target.value.trim().toLowerCase();
-        if(value.length < 3) {
-            return
-        }
-        size = 20;
-        setFullIngredientListVar();
-        optVals = fullIngredientList.filter(ingredient => ingredient.includes(value)).slice(0, size);
-        const options =  optVals.map(ingredient => '<option>' + ingredient + '</option>').join('');
-        document.getElementById('ingredient_datalist').innerHTML = options;
-     } 
+    // THE BELOW ARE USED FOR POPULATING EXISTING INGREDIENTS, BUT THE UI WAS LAGGY WITH SO MUCH DATA
+    // UNCOMMENT THE BELOW AND 'full_ingredient_datalist' IN HOME.HTML, and pass the ingredients in app.py, TO RE-ADD FUNCTIONALITY
+    // function getFullIngredientList(){
+    //     dl = document.getElementById("full_ingredient_datalist");
+    //     options = dl.getElementsByTagName("option");
+    //     ingredients = []
+    //     for (let index = 0; index < options.length; index++) {
+    //         const element = options[index];
+    //         ingredients.push(element.value)
+    //     }
+    //     return ingredients
+    // }
+    // let fullIngredientList = []
+    // document.getElementById("tb_ingredient").addEventListener('keyup', setSuggestedIngredients)
+    // function setFullIngredientListVar(){
+    //     if(fullIngredientList.length == 0){
+    //         fullIngredientList =  getFullIngredientList();
+    //     }
+    // }
+    //  function setSuggestedIngredients(e) { 
+    //     document.getElementById('ingredient_datalist').innerHTML = "";
+    //     const value = e.target.value.trim().toLowerCase();
+    //     if(value.length < 3) {
+    //         return
+    //     }
+    //     size = 20;
+    //     setFullIngredientListVar();
+    //     optVals = fullIngredientList.filter(ingredient => ingredient.includes(value)).slice(0, size);
+    //     const options =  optVals.map(ingredient => '<option>' + ingredient + '</option>').join('');
+    //     document.getElementById('ingredient_datalist').innerHTML = options;
+    //  } 
 })();

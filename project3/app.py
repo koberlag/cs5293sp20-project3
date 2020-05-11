@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from project3.ingredients import INGREDIENTS
+# from project3.ingredients import INGREDIENTS
 from project3.analyzer import analyze_ingredients
 
 app=Flask(__name__)
@@ -8,7 +8,8 @@ app=Flask(__name__)
 
 @app.route("/")
 def home():
-    return render_template("home.html", ingredient_list=INGREDIENTS)
+    return render_template("home.html")
+    # return render_template("home.html", ingredient_list=INGREDIENTS)
 
 @app.route("/analyze",  methods=['POST'])
 def analyze():
